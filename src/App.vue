@@ -1,31 +1,88 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <section class="splash">
+      <div class='loading' v-if="$store.state.isLoading">
+        Loading...
+      </div>
+      <div class="backdrop"></div>
+      <router-view />
+    </section>
   </div>
 </template>
 
 <style>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'San Francisco', -apple-system, system-ui, BlinkMacSystemFont, 'Helvetica', sans-serif; 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
-#nav {
-  padding: 30px;
-}
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+/* SPLASH */
+.splash {
+  background-image: url('assets/maps.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  min-height: 700px;
+  position: relative;
+  background-position: center;
+  text-align: center;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.splash_container {
+  padding-top: 100px;
+}
+.splash_container h4 {
+  margin-top: 20px;
+}
+.app_store_badge {
+  margin-top: 50px;
+}
+.app_store_badge a img {
+  width: 200px;
+}
+.text_link_module {
+  margin-top: 120px;
+}
+.text_link_form > .success, .text_link_form > .error {
+  display: none;
+}
+.text_link_form.success > .success, .text_link_form.error > .error {
+  display: block;
+  margin-top: 5px;
+}
+.text_link_form.success .input_container {
+  display: none;
+}
+.text_link_form > .success {
+  color: #00b900;
+}
+.text_link_form > .error {
+  color: #ED384E;
+}
+.text_link_module h4 {
+  margin-bottom: 20px;
+}
+.text_link_form {
+  max-width: 455px;
+  margin: 10px auto 0;
+  display: flex;
+  flex-flow: column;
+}
+.text_link_form button {
+  flex-shrink: 0;
+  margin-left: 10px;
+}
+.text_link_form input {
+  flex: auto;
+}
+.phone_mock {
+  width: 100%;
+  max-width: 900px;
+  position: absolute;
+  bottom: -90px;
+  left: 50%;
+  margin-left: -450px;
 }
 </style>

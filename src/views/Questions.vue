@@ -1,19 +1,18 @@
 <template>
-  <div class='questions'>
+  <div class="questions">
     <v-container>
       <v-layout>
-        <v-flex
-          xs12
-          md4
-          offset-md4
-        >
+        <v-flex xs12 md4 offset-md4>
           <div v-if="$store.state.questions.assessments.length > 0">
             <transition name="slide-left">
               <div v-if="$store.state.togglePage">
                 <v-layout wrap justify-space-between>
                   <v-flex class="xs12">
                     <a @click.prevent="$store.commit('navPreviousQuestion')">
-                      <p class="text-sm-left" v-if="$store.getters.currentQuestion > 1">
+                      <p
+                        class="text-sm-left"
+                        v-if="$store.getters.currentQuestion > 1"
+                      >
                         <v-icon>arrow_back_ios</v-icon>
                       </p>
                     </a>
@@ -25,20 +24,27 @@
                 <v-layout wrap justify-space-between>
                   <v-flex class="xs6">
                     <p class="text-sm-left">
-                      {{currentAssessmentRef.display_name}}
+                      {{ currentAssessmentRef.display_name }}
                     </p>
                   </v-flex>
                   <v-flex class="xs6">
                     <p class="text-sm-right">
-                      {{progressText}}
+                      {{ progressText }}
                     </p>
                   </v-flex>
                 </v-layout>
-                <h3>{{$store.state.questions.assessments[$store.state.questions.currentAssessment].title}}</h3>
+                <h3>
+                  {{
+                    $store.state.questions.assessments[
+                      $store.state.questions.currentAssessment
+                    ].title
+                  }}
+                </h3>
                 <Question
                   :question="currentQuestionRef"
                   :answers="currentAssessmentRef.answers"
-                  @question-answered="handleQuestionAnswered" />
+                  @question-answered="handleQuestionAnswered"
+                />
               </div>
             </transition>
           </div>
@@ -49,7 +55,7 @@
 </template>
 
 <script>
-import Question from '@/components/Question'
+import Question from "@/components/Question";
 
 export default {
   name: "questions",
@@ -57,47 +63,50 @@ export default {
     Question
   },
   data() {
-    return {}
+    return {};
   },
   created() {
     if (this.$store.getters.loggedIn) {
-      this.$store.dispatch('loadAssessments')
+      this.$store.dispatch("loadAssessments");
     } else {
-      this.$router.push({ name: 'Login' })
+      this.$router.push({ name: "Login" });
     }
   },
   computed: {
     currentAssessmentRef() {
-      return this.$store.state.questions.assessments[this.$store.state.questions.currentAssessment]
+      return this.$store.state.questions.assessments[
+        this.$store.state.questions.currentAssessment
+      ];
     },
     currentQuestionRef() {
-      return this.currentAssessmentRef.questions[this.$store.state.questions.currentQuestion]
+      return this.currentAssessmentRef.questions[
+        this.$store.state.questions.currentQuestion
+      ];
     },
     progressText() {
-      return `${this.$store.getters.currentQuestion} out of ${this.$store.getters.totalQuestions}`
+      return `${this.$store.getters.currentQuestion} out of ${
+        this.$store.getters.totalQuestions
+      }`;
     },
     progressStyle() {
       return {
         width: `${this.$store.getters.pageProgressPercent}%`,
-        height: '3px',
-        backgroundColor: '#2c3e50'
-      }
+        height: "3px",
+        backgroundColor: "#2c3e50"
+      };
     }
   },
   methods: {
     handleQuestionAnswered(response) {
-      this.$store.commit('answerQuestionAndAdvance', response)
+      this.$store.commit("answerQuestionAndAdvance", response);
     }
   },
   watch: {
-    '$store.state.summary.isComplete'(val) {
-      console.log('isComplete!?!?')
-      console.log(val)
-      console.log(this.$store)
-      this.$router.push({ name: 'Summary' })
+    "$store.state.summary.isComplete"(val) {
+      if (val) this.$router.push({ name: "Summary" });
     }
   }
-}
+};
 </script>
 
 <style>

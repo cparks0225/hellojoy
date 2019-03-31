@@ -3,12 +3,12 @@
     <div @click="loginUser()">
       <UserLogo :hueRotate="user.logo" />
       <h1>{{ user.name }}</h1>
-    </div> 
+    </div>
   </div>
 </template>
 
 <script>
-import UserLogo from '@/components/UserLogo'
+import UserLogo from "@/components/UserLogo";
 
 export default {
   name: "User",
@@ -23,21 +23,21 @@ export default {
   },
   computed: {
     userQuestions() {
-      return `/questions/${this.user.userId}`
+      return `/questions/${this.user.userId}`;
     }
   },
   methods: {
-    loginUser(user) {
-      this.$store.commit('login', this.user)
+    loginUser() {
+      this.$store.commit("login", this.user);
       this.$router.push({
-        name: 'Questions',
+        name: "Questions",
         params: {
           id: this.$store.state.login.currentUser.userId
         }
-      })
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -45,7 +45,8 @@ h1 {
   margin-top: 0em;
   margin-bottom: 1em;
 }
-img, h1 {
+img,
+h1 {
   cursor: pointer;
 }
 </style>

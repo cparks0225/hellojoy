@@ -1,12 +1,19 @@
 <template>
-  <v-btn outline color="indigo" round block @click="$emit('answer-selected', value)">{{title}}</v-btn>
+  <v-btn
+    outline
+    color="indigo"
+    round
+    block
+    @click="$emit('answer-selected', value)"
+    >{{ title }}</v-btn
+  >
 </template>
 
 <script>
 export default {
   name: "answer",
   data() {
-    return {}
+    return {};
   },
   props: {
     title: {
@@ -18,8 +25,7 @@ export default {
       required: true
     }
   }
-}
+};
 </script>
 
-<style>
-</style>
+<style></style>

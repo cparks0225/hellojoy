@@ -1,9 +1,12 @@
 <template>
   <div id="app">
     <section class="splash">
-      <div class='loading' v-if="$store.state.isLoading">
+      <div class="loading" v-if="$store.state.isLoading">
         Loading...
       </div>
+      <v-alert v-model="$store.state.hasError" type="error" color="#ff5252">
+        {{ $store.state.errorString }}
+      </v-alert>
       <div class="backdrop"></div>
       <router-view />
     </section>
@@ -12,7 +15,8 @@
 
 <style>
 #app {
-  font-family: 'San Francisco', -apple-system, system-ui, BlinkMacSystemFont, 'Helvetica', sans-serif; 
+  font-family: "San Francisco", -apple-system, system-ui, BlinkMacSystemFont,
+    "Helvetica", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -21,7 +25,7 @@
 
 /* SPLASH */
 .splash {
-  background-image: url('assets/maps.svg');
+  background-image: url("assets/maps.svg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
@@ -45,10 +49,12 @@
 .text_link_module {
   margin-top: 120px;
 }
-.text_link_form > .success, .text_link_form > .error {
+.text_link_form > .success,
+.text_link_form > .error {
   display: none;
 }
-.text_link_form.success > .success, .text_link_form.error > .error {
+.text_link_form.success > .success,
+.text_link_form.error > .error {
   display: block;
   margin-top: 5px;
 }
@@ -59,7 +65,7 @@
   color: #00b900;
 }
 .text_link_form > .error {
-  color: #ED384E;
+  color: #ed384e;
 }
 .text_link_module h4 {
   margin-bottom: 20px;

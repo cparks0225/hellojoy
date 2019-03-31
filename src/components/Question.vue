@@ -1,14 +1,18 @@
 <template>
-  <div class='question'>
-    <h1>{{question.title}}</h1>
-    <div v-for="answer in answers">
-      <Answer :title="answer.title" :value="answer.value" @answer-selected="onAnswerSelected" />
+  <div class="question">
+    <h1>{{ question.title }}</h1>
+    <div v-for="answer in answers" :key="answer.title">
+      <Answer
+        :title="answer.title"
+        :value="answer.value"
+        @answer-selected="onAnswerSelected"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import Answer from '@/components/Answer'
+import Answer from "@/components/Answer";
 
 export default {
   name: "question",
@@ -16,7 +20,7 @@ export default {
     Answer
   },
   data() {
-    return {}
+    return {};
   },
   props: {
     question: {
@@ -33,11 +37,11 @@ export default {
       let responseObj = {
         key: this.question.key,
         val: i
-      }
-      this.$emit('question-answered', responseObj)
+      };
+      this.$emit("question-answered", responseObj);
     }
   }
-}
+};
 </script>
 
 <style>
